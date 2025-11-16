@@ -1,0 +1,315 @@
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>어둠의 4요소 간이 테스트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .question-group {
+            margin-bottom: 2rem;
+            background-color: #1F2937; /* dark:bg-gray-800 */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            border: 1px solid #374151; /* dark:border-gray-700 */
+        }
+        .question-text {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 500; /* medium */
+            color: #F3F4F6; /* dark:text-gray-100 */
+            margin-bottom: 1rem;
+        }
+        .likert-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .likert-scale label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: #D1D5DB; /* dark:text-gray-300 */
+            font-size: 0.875rem;
+            width: 50px; /* 고정 너비 */
+            text-align: center;
+        }
+        .likert-scale input[type="radio"] {
+            margin-bottom: 0.25rem;
+            accent-color: #60A5FA; /* blue-400 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .result-card {
+            background-color: #374151; /* dark:bg-gray-700 */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-card .trait-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #F9FAFB; /* dark:text-gray-50 */
+        }
+        .result-card .trait-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60A5FA; /* blue-400 */
+        }
+        .result-card .trait-interpretation {
+            font-size: 1rem;
+            color: #D1D5DB; /* dark:text-gray-300 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-white mb-4">🪞 어둠의 4요소 간이 테스트</h1>
+        <p class="text-center text-gray-400 mb-6">
+            다음 문항을 읽고, 자신과 얼마나 일치하는지 선택해 주세요.<br>
+            <strong class="text-yellow-400">이 테스트는 재미를 위한 간이 테스트이며, 전문적인 심리 진단이 아닙니다.</strong>
+        </p>
+
+        <form id="sd4Form">
+            <!-- Machiavellianism -->
+            <fieldset class="question-group">
+                <legend class="text-xl font-semibold text-white mb-4">전략 (Machiavellianism)</legend>
+                <div class="mb-4">
+                    <p class="question-text" id="q1">1. 나는 대화의 방향을 내가 원하는 쪽으로 이끄는 데 능숙하다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q1" value="1" required></label>
+                        <label>(2)<input type="radio" name="q1" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q1" value="3"></label>
+                        <label>(4)<input type="radio" name="q1" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q1" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q2">2. 어떤 행동을 하기 전에 그것이 나에게 어떤 이익이 될지 먼저 계산한다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q2" value="1" required></label>
+                        <label>(2)<input type="radio" name="q2" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q2" value="3"></label>
+                        <label>(4)<input type="radio" name="q2" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q2" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q3">3. 목표를 위해서라면 약간의 과장이나 진실을 숨기는 것은 필요할 수 있다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q3" value="1" required></label>
+                        <label>(2)<input type="radio" name="q3" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q3" value="3"></label>
+                        <label>(4)<input type="radio" name="q3" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q3" value="5"></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Narcissism -->
+            <fieldset class="question-group">
+                <legend class="text-xl font-semibold text-white mb-4">주목 (Narcissism)</legend>
+                <div class="mb-4">
+                    <p class="question-text" id="q4">4. 나는 다른 사람들보다 더 많은 관심과 인정을 받을 자격이 있다고 느낀다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q4" value="1" required></label>
+                        <label>(2)<input type="radio" name="q4" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q4" value="3"></label>
+                        <label>(4)<input type="radio" name="q4" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q4" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q5">5. 나는 모임이나 대화의 중심에 있을 때 가장 기분이 좋다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q5" value="1" required></label>
+                        <label>(2)<input type="radio" name="q5" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q5" value="3"></label>
+                        <label>(4)<input type="radio" name="q5" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q5" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q6">6. 솔직히 말해, 나는 대부분의 사람들보다 여러 면에서 더 뛰어나다고 생각한다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q6" value="1" required></label>
+                        <label>(2)<input type="radio" name="q6" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q6" value="3"></label>
+                        <label>(4)<input type="radio" name="q6" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q6" value="5"></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Psychopathy -->
+            <fieldset class="question-group">
+                <legend class="text-xl font-semibold text-white mb-4">충동 (Psychopathy)</legend>
+                <div class="mb-4">
+                    <p class="question-text" id="q7">7. 어떤 일이 흥미진진하고 자극적이라면, 그 결과가 위험할지라도 일단 하고 본다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q7" value="1" required></label>
+                        <label>(2)<input type="radio" name="q7" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q7" value="3"></label>
+                        <label>(4)<input type="radio" name="q7" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q7" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q8">8. 다른 사람이 감정적으로 힘들어할 때, 나는 그 감정을 이해하거나 공감하기 어렵다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q8" value="1" required></label>
+                        <label>(2)<input type="radio" name="q8" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q8" value="3"></label>
+                        <label>(4)<input type="radio" name="q8" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q8" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q9">9. 다른 사람에게 상처가 될 수 있는 말을 별생각 없이(무심하게) 할 때가 있다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q9" value="1" required></label>
+                        <label>(2)<input type="radio" name="q9" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q9" value="3"></label>
+                        <label>(4)<input type="radio" name="q9" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q9" value="5"></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Sadism -->
+            <fieldset class="question-group">
+                <legend class="text-xl font-semibold text-white mb-4">자극 (Sadism)</legend>
+                <div class="mb-4">
+                    <p class="question-text" id="q10">10. 나는 다른 사람을 놀리거나 장난스럽게 짓궂은 말을 하는 것을 즐긴다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q10" value="1" required></label>
+                        <label>(2)<input type="radio" name="q10" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q10" value="3"></label>
+                        <label>(4)<input type="radio" name="q10" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q10" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q11">11. 영화나 게임에서 '나쁜' 캐릭터가 이기거나 혼란을 일으킬 때 묘한 재미를 느낀다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q11" value="1" required></label>
+                        <label>(2)<input type="radio" name="q11" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q11" value="3"></label>
+                        <label>(4)<input type="radio" name="q11" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q11" value="5"></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text" id="q12">12. 인터넷에서 누군가 실수로 망신당하는 것을 볼 때, 솔직히 좀 재미있다고 느낀다.</p>
+                    <div class="likert-scale">
+                        <label>전혀<br>아니다 (1)<input type="radio" name="q12" value="1" required></label>
+                        <label>(2)<input type="radio" name="q12" value="2"></label>
+                        <label>보통 (3)<input type="radio" name="q12" value="3"></label>
+                        <label>(4)<input type="radio" name="q12" value="4"></label>
+                        <label>매우<br>그렇다 (5)<input type="radio" name="q12" value="5"></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="button" id="submitButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300">
+                결과 확인하기
+            </button>
+        </form>
+
+        <div id="results" class="hidden mt-8">
+            <h2 class="text-2xl font-bold text-white text-center mb-6">나의 간이 성향 점수</h2>
+            <p class="text-center text-gray-400 mb-6">(각 3점 ~ 15점 범위)</p>
+
+            <div class="space-y-4">
+                <div class="result-card">
+                    <div>
+                        <div class="trait-name">(M) 마키아벨리즘 (전략)</div>
+                        <div class="trait-interpretation" id="mach-interpretation"></div>
+                    </div>
+                    <div class="trait-score" id="mach-score">0점</div>
+                </div>
+                <div class="result-card">
+                    <div>
+                        <div class="trait-name">(N) 나르시시즘 (주목)</div>
+                        <div class="trait-interpretation" id="narc-interpretation"></div>
+                    </div>
+                    <div class="trait-score" id="narc-score">0점</div>
+                </div>
+                <div class="result-card">
+                    <div>
+                        <div class="trait-name">(P) 사이코패시 (충동)</div>
+                        <div class="trait-interpretation" id="psyc-interpretation"></div>
+                    </div>
+                    <div class="trait-score" id="psyc-score">0점</div>
+                </div>
+                <div class="result-card">
+                    <div>
+                        <div class="trait-name">(S) 새디즘 (자극)</div>
+                        <div class="trait-interpretation" id="sadi-interpretation"></div>
+                    </div>
+                    <div class="trait-score" id="sadi-score">0점</div>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-400 mt-8">
+                <strong>결과 해석:</strong> 이 점수는 여러분이 어떤 성향을 '가지고 있다'가 아니라, 일상에서 어떤 성향이 '더 쉽게 나타나는지'를 보여줍니다.
+                발표에서 이 성향들이 디지털 환경과 어떻게 상호작용하는지 알아보겠습니다.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const form = document.getElementById('sd4Form');
+            // 모든 라디오 버튼이 선택되었는지 확인
+            if (!form.checkValidity()) {
+                alert('모든 문항에 응답해 주세요.');
+                return;
+            }
+
+            // 점수 계산
+            const getValue = (name) => parseInt(document.querySelector(`input[name="${name}"]:checked`).value);
+
+            const machScore = getValue('q1') + getValue('q2') + getValue('q3');
+            const narcScore = getValue('q4') + getValue('q5') + getValue('q6');
+            const psycScore = getValue('q7') + getValue('q8') + getValue('q9');
+            const sadiScore = getValue('q10') + getValue('q11') + getValue('q12');
+
+            // 해석 함수
+            const getInterpretation = (score) => {
+                if (score <= 7) return '일상에서 잘 드러나지 않는 편입니다.';
+                if (score <= 12) return '상황에 따라 평균적인 수준으로 나타납니다.';
+                return '일상에서 비교적 자주 나타나는 편입니다.';
+            };
+
+            // 결과 표시
+            document.getElementById('mach-score').textContent = `${machScore}점`;
+            document.getElementById('narc-score').textContent = `${narcScore}점`;
+            document.getElementById('psyc-score').textContent = `${psycScore}점`;
+            document.getElementById('sadi-score').textContent = `${sadiScore}점`;
+
+            document.getElementById('mach-interpretation').textContent = getInterpretation(machScore);
+            document.getElementById('narc-interpretation').textContent = getInterpretation(narcScore);
+            document.getElementById('psyc-interpretation').textContent = getInterpretation(psycScore);
+            document.getElementById('sadi-interpretation').textContent = getInterpretation(sadiScore);
+
+            // 결과 영역 보이기
+            document.getElementById('results').classList.remove('hidden');
+
+            // 결과 영역으로 스크롤
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>
